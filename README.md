@@ -9,7 +9,7 @@ C. 2
 D. 6
 Answer:
 ```
-RWKV-6 7B MMLU Accurancy = 42.8%
+RWKV-6 7B MMLU Accuracy = 42.8%
 
 - improved format:
 ```
@@ -22,4 +22,4 @@ D. 6
 
 Assistant: The answer is
 ```
-RWKV-6 7B MMLU Accurancy = 46.7%
+RWKV-6 7B MMLU Accuracy = 46.7%

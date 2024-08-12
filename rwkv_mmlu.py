@@ -113,9 +113,9 @@ for sample in mmlu_test:
     else:
         all_prefix = few_shot_prompt + pre_prompt + question_prompt + choices_prompt + answer_prompt
 
-    print('-' * 100)
-    print(all_prefix)
-    print('-' * 100)
+    # print('-' * 100)
+    # print(all_prefix)
+    # print('-' * 100)
     
     all_prefix_ids = pipeline.tokenizer.encode(all_prefix)
     prefix_ids_length = len(all_prefix_ids)
