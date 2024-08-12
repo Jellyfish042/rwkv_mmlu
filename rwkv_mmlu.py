@@ -1,12 +1,7 @@
 ########################################################################################################
 # The RWKV Language Model - https://github.com/BlinkDL/RWKV-LM
 ########################################################################################################
-#
-# pip install rwkv lm_eval --upgrade
-# previous version only support lm_eval==0.3.0
-# this version support lm_eval>=0.4.0
-#
-import os, sys, types, json, math, time, datetime, copy
+import os, json, datetime, copy
 from tqdm import tqdm
 import numpy as np
 np.set_printoptions(precision=4, suppress=True, linewidth=200)

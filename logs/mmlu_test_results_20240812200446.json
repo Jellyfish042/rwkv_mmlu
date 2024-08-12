@@ -1,0 +1,13 @@
+{
+    "correct": 6012,
+    "total": 14042,
+    "accuracy": 0.4281441390115368,
+    "accuracy_norm": 0.4281441390115368,
+    "PRE_TEMPLATE": "\nThe following are multiple choice questions (with answers) about <SUBJECT>.",
+    "QUESTION_TEMPLATE": "\n<Q>",
+    "CHOICE_TEMPLATE": "\nA. <A>\nB. <B>\nC. <C>\nD. <D>",
+    "ANSWER_TEMPLATE": "\nAnswer:",
+    "GEN_INT_TEMPLATE": "\n\nAssistant: Let's think step by step.\n",
+    "GEN_ANS_ADD": "\nTherefore, the answer is:",
+    "USE_COT": false
+}
