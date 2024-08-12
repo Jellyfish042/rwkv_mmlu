@@ -61,12 +61,6 @@ QUESTION_TEMPLATE = "<Q>"
 CHOICE_TEMPLATE = "\nA. <|A|>\nB. <|B|>\nC. <|C|>\nD. <|D|>"
 ANSWER_TEMPLATE = "\n\nAssistant: The answer is"
 
-# test
-# PRE_TEMPLATE = '\nUser: '
-# QUESTION_TEMPLATE = "<Q>"
-# CHOICE_TEMPLATE = "\n<A> <|A|>\n<B> <|B|>\n<C> <|C|>\n<D> <|D|>"
-# ANSWER_TEMPLATE = "\n\nAssistant: The answer is <"
-
 # other templates
 FEW_SHOT_TEMPLATE = "\nUser: <Q><CHOICES>\n\nAssistant: The answer is <A>\n"
 
@@ -134,10 +128,10 @@ for idx, sample in enumerate(mmlu_test):
         )
         for sample in filtered_dataset:
             few_shot_choices_prompt = (
-                CHOICE_TEMPLATE.replace("<A>", sample["choices"][0])
-                .replace("<B>", sample["choices"][1])
-                .replace("<C>", sample["choices"][2])
-                .replace("<D>", sample["choices"][3])
+                CHOICE_TEMPLATE.replace("<|A|>", sample["choices"][0])
+                .replace("<|B|>", sample["choices"][1])
+                .replace("<|C|>", sample["choices"][2])
+                .replace("<|D|>", sample["choices"][3])
             )
             few_shot_prompt += (
                 FEW_SHOT_TEMPLATE.replace("<Q>", sample["question"])
@@ -171,6 +165,7 @@ for idx, sample in enumerate(mmlu_test):
         print("-" * 100)
         print(all_prefix)
         print("-" * 100)
+        format_example = all_prefix
 
     all_prefix_ids = pipeline.tokenizer.encode(all_prefix)
     prefix_ids_length = len(all_prefix_ids)
@@ -225,6 +220,7 @@ for idx, sample in enumerate(mmlu_test):
             f"Correct: {correct} - Total: {total} - Accuracy: {correct / total:.5f} - Accuracy Norm: {correct_norm / total:.5f}"
         )
         pbar.update(1)
+pbar.close()
 
 print(
     f"Correct: {correct} - Total: {total} - Accuracy: {correct / total:.5f} - Accuracy Norm: {correct_norm / total:.5f}"
@@ -247,6 +243,7 @@ with open(file_name, "w") as f:
             "GEN_INT_TEMPLATE": GEN_INT_TEMPLATE,
             "GEN_ANS_ADD": GEN_ANS_ADD,
             "USE_COT": USE_COT,
+            "example": format_example,
         },
         f,
         indent=4,
