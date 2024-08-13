@@ -232,6 +232,7 @@ file_name = f'logs/mmlu_test_results_{now.strftime("%Y%m%d%H%M%S")}.json'
 with open(file_name, "w") as f:
     json.dump(
         {
+            "model": MODEL_NAME,
             "correct": correct,
             "total": total,
             "accuracy": correct / total,
@@ -242,6 +243,7 @@ with open(file_name, "w") as f:
             "ANSWER_TEMPLATE": ANSWER_TEMPLATE,
             "GEN_INT_TEMPLATE": GEN_INT_TEMPLATE,
             "GEN_ANS_ADD": GEN_ANS_ADD,
+            "USE_FEW_SHOT": USE_FEW_SHOT,
             "USE_COT": USE_COT,
             "example": format_example,
         },
