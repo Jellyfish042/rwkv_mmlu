@@ -87,7 +87,7 @@ args = PIPELINE_ARGS(
 
 ########################################################################################################
 # RUN EVALUATION
-SHUFFLE = True
+SHUFFLE = False
 SEED = 42
 USE_COT = False
 USE_FEW_SHOT = False  # 5-shot
