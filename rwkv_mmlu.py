@@ -1,7 +1,7 @@
 ########################################################################################################
 # The RWKV Language Model - https://github.com/BlinkDL/RWKV-LM
 ########################################################################################################
-import os, json, datetime, copy
+import os, json, datetime, copy, random
 from tqdm import tqdm
 import numpy as np
 
@@ -87,8 +87,15 @@ args = PIPELINE_ARGS(
 
 ########################################################################################################
 # RUN EVALUATION
+SHUFFLE = True
+SEED = 42
 USE_COT = False
 USE_FEW_SHOT = False  # 5-shot
+
+random.seed(SEED)
+np.random.seed(SEED)
+torch.manual_seed(SEED)
+torch.cuda.manual_seed(SEED)
 
 correct = 0
 correct_norm = 0
@@ -108,6 +115,11 @@ for idx, sample in enumerate(mmlu_test):
     choices = sample["choices"]
     subject = sample["subject"]
     gt = sample["answer"]
+
+    if SHUFFLE:
+        original_gt_text = choices[gt]
+        np.random.shuffle(choices)
+        gt = choices.index(original_gt_text)
 
     pre_prompt = PRE_TEMPLATE.replace("<SUBJECT>", subject.replace("_", " "))
     question_prompt = QUESTION_TEMPLATE.replace("<Q>", question)
@@ -246,6 +258,8 @@ with open(file_name, "w") as f:
             "USE_FEW_SHOT": USE_FEW_SHOT,
             "USE_COT": USE_COT,
             "example": format_example,
+            "shuffle": SHUFFLE,
+            "seed": SEED,
         },
         f,
         indent=4,
