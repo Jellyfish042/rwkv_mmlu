@@ -17,14 +17,13 @@ from torch.nn import functional as F
 from datasets import load_dataset, load_from_disk
 
 os.environ["RWKV_JIT_ON"] = "1"
-os.environ["RWKV_CUDA_ON"] = "0"
+os.environ["RWKV_CUDA_ON"] = "1"
 from rwkv.model import RWKV
 from rwkv.utils import PIPELINE, PIPELINE_ARGS
 
 ########################################################################################################
 # MODEL
 MODEL_NAME = "RWKV-x060-World-7B-v2.1-20240507-ctx4096.pth"
-MODEL_NAME = r"E:\models\rwkv_5_0b1\RWKV-5-World-0.1B-v1-20230803-ctx4096.pth"
 
 print(f"Loading model - {MODEL_NAME}")
 model = RWKV(model=MODEL_NAME, strategy="cuda fp16", verbose=False)
