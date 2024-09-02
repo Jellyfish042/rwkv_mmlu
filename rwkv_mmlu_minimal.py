@@ -17,7 +17,7 @@ os.environ["RWKV_JIT_ON"] = "1"
 os.environ["RWKV_CUDA_ON"] = "1"
 
 from rwkv.model import RWKV
-from rwkv.utils import PIPELINE, PIPELINE_ARGS
+from rwkv.utils import PIPELINE
 
 ########################################################################################################
 # MODEL
@@ -41,22 +41,34 @@ mmlu_dev = load_from_disk("mmlu_dev_dataset")
 ########################################################################################################
 # PROMPT TEMPLATE
 # lm_eval baseline - 42.8%
-# PRE_TEMPLATE = '\nThe following are multiple choice questions (with answers) about <SUBJECT>.'
-# QUESTION_TEMPLATE = "\n<Q>"
-# CHOICE_TEMPLATE = "\nA. <|A|>\nB. <|B|>\nC. <|C|>\nD. <|D|>"
-# ANSWER_TEMPLATE = "\nAnswer:"
+# TEMPLATE = '''
+# User: The following are multiple choice questions (with answers) about <SUBJECT>.
+# <Q>
+# A. <|A|>
+# B. <|B|>
+# C. <|C|>
+# D. <|D|>
+# Answer:'''
 
 # better format for RWKV - 46.7%
-PRE_TEMPLATE = "\nUser: "
-QUESTION_TEMPLATE = "<Q>"
-CHOICE_TEMPLATE = "\nA. <|A|>\nB. <|B|>\nC. <|C|>\nD. <|D|>"
-ANSWER_TEMPLATE = "\n\nAssistant: The answer is"
+TEMPLATE = """
+User: <Q>
+A. <|A|>
+B. <|B|>
+C. <|C|>
+D. <|D|>
 
-# Professional format - 47.7%
-# PRE_TEMPLATE = "User: You are a very talented expert in <SUBJECT>. Answer this question:\n" # Correct: 6696 - Total: 14042 - Accuracy: 0.47686
-# QUESTION_TEMPLATE = "<Q>"
-# CHOICE_TEMPLATE = "\nA. <|A|>\nB. <|B|>\nC. <|C|>\nD. <|D|>"
-# ANSWER_TEMPLATE = "\n\nAssistant: The answer is"
+Assistant: The answer is"""
+
+# prompt template pro max - 47.7%
+# TEMPLATE = '''User: You are a very talented expert in <SUBJECT>. Answer this question:
+# <Q>
+# A. <|A|>
+# B. <|B|>
+# C. <|C|>
+# D. <|D|>
+
+# Assistant: The answer is'''
 
 # choices
 CHOICES = [" A", " B", " C", " D"]
@@ -77,7 +89,7 @@ total = 0
 pbar = tqdm(total=len(mmlu_test))
 
 choices_token = [pipeline.tokenizer.encode(x) for x in CHOICES]
-assert all([len(x) == 1 for x in choices_token]), "Choices are not single token"
+assert all([len(x) == 1 for x in choices_token]), "Choices are not single token, use rwkv_mmlu.py instead"
 choices_token = [x[0] for x in choices_token]
 
 for idx, sample in enumerate(mmlu_test):
@@ -86,24 +98,19 @@ for idx, sample in enumerate(mmlu_test):
     subject = sample["subject"]
     gt = sample["answer"]
 
-    if SHUFFLE and not any(["Both" in x for x in choices]):
+    if SHUFFLE and not any(["Both" in x for x in choices]):  # exclude choices like "Both A and B"
         original_gt_text = choices[gt]
         np.random.shuffle(choices)
         gt = choices.index(original_gt_text)
 
-    pre_prompt = PRE_TEMPLATE.replace("<SUBJECT>", subject.replace("_", " "))
-    question_prompt = QUESTION_TEMPLATE.replace("<Q>", question)
-    choices_prompt = (
-        CHOICE_TEMPLATE.replace("<|A|>", choices[0])
+    all_prefix = (
+        TEMPLATE.replace("<Q>", question)
+        .replace("<|A|>", choices[0])
         .replace("<|B|>", choices[1])
         .replace("<|C|>", choices[2])
         .replace("<|D|>", choices[3])
+        .replace("<SUBJECT>", subject.replace("_", " "))
     )
-    answer_prompt = ANSWER_TEMPLATE
-    # print('\n\n' + '=' * 100)
-    # print(f'Question: {question}\nChoices: {choices}\nGT: {gt}')
-
-    all_prefix = pre_prompt + question_prompt + choices_prompt + answer_prompt
 
     if idx == 0:
         print(f"Format example:")
@@ -120,13 +127,9 @@ for idx, sample in enumerate(mmlu_test):
     if torch.argmax(target_prob).item() == gt:
         correct += 1
     total += 1
-    pbar.set_description(
-        f"Correct: {correct} - Total: {total} - Accuracy: {correct / total:.5f}"
-    )
+    pbar.set_description(f"Correct: {correct} - Total: {total} - Accuracy: {correct / total:.5f}")
     pbar.update(1)
 pbar.close()
-
-print(f"Correct: {correct} - Total: {total} - Accuracy: {correct / total:.5f}")
 
 # Save results
 now = datetime.datetime.now()
@@ -138,10 +141,7 @@ with open(file_name, "w") as f:
             "correct": correct,
             "total": total,
             "accuracy": correct / total,
-            "PRE_TEMPLATE": PRE_TEMPLATE,
-            "QUESTION_TEMPLATE": QUESTION_TEMPLATE,
-            "CHOICE_TEMPLATE": CHOICE_TEMPLATE,
-            "ANSWER_TEMPLATE": ANSWER_TEMPLATE,
+            "template": TEMPLATE,
             "example": format_example,
             "shuffle": SHUFFLE,
             "seed": SEED,
@@ -149,3 +149,4 @@ with open(file_name, "w") as f:
         f,
         indent=4,
     )
+print(f"Results saved to {file_name}")
