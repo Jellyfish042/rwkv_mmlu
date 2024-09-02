@@ -42,7 +42,7 @@ mmlu_dev = load_from_disk("mmlu_dev_dataset")
 # PROMPT TEMPLATE
 # lm_eval baseline - 42.8%
 # TEMPLATE = '''
-# User: The following are multiple choice questions (with answers) about <SUBJECT>.
+# The following are multiple choice questions (with answers) about <SUBJECT>.
 # <Q>
 # A. <|A|>
 # B. <|B|>
