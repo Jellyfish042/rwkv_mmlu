@@ -119,7 +119,8 @@ for idx, sample in enumerate(mmlu_test):
         print("-" * 100)
         format_example = all_prefix
 
-    all_prefix_ids = pipeline.tokenizer.encode(all_prefix)
+    # all_prefix_ids = pipeline.tokenizer.encode(all_prefix)
+    all_prefix_ids = [0] + pipeline.tokenizer.encode(all_prefix.strip())
 
     logits, _ = model.forward(all_prefix_ids, None, full_output=False)
     neg_log_prob = F.log_softmax(logits, dim=-1)
