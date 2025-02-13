@@ -1,0 +1,79 @@
+{
+  "builder_name": "parquet",
+  "citation": "",
+  "config_name": "default",
+  "dataset_name": "mmlu-pro",
+  "dataset_size": 8779273,
+  "description": "",
+  "download_checksums": {
+    "hf://datasets/TIGER-Lab/MMLU-Pro@014c8cf520218fc7f1ecec95c691a83ae5b8ba14/data/test-00000-of-00001.parquet": {
+      "num_bytes": 4150253,
+      "checksum": null
+    },
+    "hf://datasets/TIGER-Lab/MMLU-Pro@014c8cf520218fc7f1ecec95c691a83ae5b8ba14/data/validation-00000-of-00001.parquet": {
+      "num_bytes": 45312,
+      "checksum": null
+    }
+  },
+  "download_size": 4195565,
+  "features": {
+    "question_id": {
+      "dtype": "int64",
+      "_type": "Value"
+    },
+    "question": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "options": {
+      "feature": {
+        "dtype": "string",
+        "_type": "Value"
+      },
+      "_type": "Sequence"
+    },
+    "answer": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "answer_index": {
+      "dtype": "int64",
+      "_type": "Value"
+    },
+    "cot_content": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "category": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "src": {
+      "dtype": "string",
+      "_type": "Value"
+    }
+  },
+  "homepage": "",
+  "license": "",
+  "size_in_bytes": 12974838,
+  "splits": {
+    "test": {
+      "name": "test",
+      "num_bytes": 8718112,
+      "num_examples": 12032,
+      "dataset_name": "mmlu-pro"
+    },
+    "validation": {
+      "name": "validation",
+      "num_bytes": 61161,
+      "num_examples": 70,
+      "dataset_name": "mmlu-pro"
+    }
+  },
+  "version": {
+    "version_str": "0.0.0",
+    "major": 0,
+    "minor": 0,
+    "patch": 0
+  }
+}
