@@ -1,0 +1,5 @@
+*.pth
+ceval-exam/
+gsm8k_test_dataset/
+logs/
+rwkv_gsm8k.py
