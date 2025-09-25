@@ -15,7 +15,7 @@ torch.backends.cuda.matmul.allow_tf32 = True
 
 ########################################################################################################
 # MODEL
-MODEL_NAME = "../models/RWKV-x070-World-2.9B-v3-20250211-ctx4096"
+MODEL_PATH = "../models/RWKV-x070-World-2.9B-v3-20250211-ctx4096"
 
 os.environ["RWKV_V7_ON"] = "1"
 os.environ["RWKV_JIT_ON"] = "1"
@@ -24,7 +24,7 @@ os.environ["RWKV_CUDA_ON"] = "1"
 from rwkv.model import RWKV
 from rwkv.utils import PIPELINE
 
-model = RWKV(model=MODEL_NAME, strategy="cuda fp16")
+model = RWKV(model=MODEL_PATH, strategy="cuda fp16")
 pipeline = PIPELINE(model, "rwkv_vocab_v20230424")
 tokenizer = pipeline.tokenizer
 
@@ -109,7 +109,7 @@ file_name = f'logs/results_{now.strftime("%Y%m%d%H%M%S")}.json'
 with open(file_name, "w") as f:
     json.dump(
         {
-            "model": MODEL_NAME,
+            "model": MODEL_PATH,
             "dataset": DATASET_PATH,
             "correct": correct,
             "total": total,
