@@ -7,6 +7,7 @@
 1. Edit `rwkv_single_choice_eval.py` to set:
    - `MODEL_PATH`
    - `DATASET_PATH`
+   - `TEMPLATE` and `TARGET_TOKEN_FORMAT` (if you want)
 2. Run:
    ```bash
    python rwkv_single_choice_eval.py
