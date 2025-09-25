@@ -36,14 +36,14 @@ TEMPLATE = """User: You are a very talented expert in <SUBJECT>. Answer this que
 <CHOICES>
 
 Assistant: The answer is"""
-TARGET_TOKEN_FORMAT = " <LATTER>"  # for example, "<LATTER>" -> "A", " <LATTER>" -> " B"
+TARGET_TOKEN_FORMAT = " <LETTER>"  # for example, "<LETTER>" -> "A", " <LETTER>" -> " B"
 
 # for Chinese benchmarks (ceval-exam etc.)
 # TEMPLATE = """User: <Q>
 # <CHOICES>
 
 # Assistant: 正确答案是"""
-# TARGET_TOKEN_FORMAT = "<LATTER>"
+# TARGET_TOKEN_FORMAT = "<LETTER>"
 
 ########################################################################################################
 # DATASET
@@ -62,7 +62,7 @@ correct = 0
 total = 0
 pbar = tqdm(total=len(dataset))
 
-choices_token = [tokenizer.encode(TARGET_TOKEN_FORMAT.replace("<LATTER>", x)) for x in ALPHABET[:max_choices]]
+choices_token = [tokenizer.encode(TARGET_TOKEN_FORMAT.replace("<LETTER>", x)) for x in ALPHABET[:max_choices]]
 assert all([len(x) == 1 for x in choices_token])
 choices_token = [x[0] for x in choices_token]
 print(f"Choices token: {choices_token}")
