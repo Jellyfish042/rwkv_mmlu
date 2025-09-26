@@ -36,14 +36,14 @@ TEMPLATE = """User: You are a very talented expert in <SUBJECT>. Answer this que
 <CHOICES>
 
 Assistant: The answer is"""
-TARGET_TOKEN_FORMAT = " <LETTER>"  # for example, "<LETTER>" -> "A", " <LETTER>" -> " B"
 
 # for Chinese benchmarks (ceval-exam etc.)
 # TEMPLATE = """User: <Q>
 # <CHOICES>
 
 # Assistant: 正确答案是"""
-# TARGET_TOKEN_FORMAT = "<LETTER>"
+
+TARGET_TOKEN_FORMAT = " <LETTER>"  # for example, "<LETTER>" -> "A", " <LETTER>" -> " A"
 
 ########################################################################################################
 # DATASET
