@@ -14,7 +14,7 @@
 
 > **Note:**  
 > Due to the inherent randomness in CoT evaluation, results may fluctuate. It is recommended to run the evaluation multiple times and average the results for a more reliable metric.
-> Performance can be further improved by further adjusting the sampling parameters.
+> Performance can be further improved by further adjusting the sampling parameters amd prompt template.
 
 ## Non-CoT Single-Choice Evaluation
 
