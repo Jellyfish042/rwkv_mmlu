@@ -372,8 +372,8 @@ print(cot_generation_input_example)
 print("-" * 100)
 
 # Generation settings
-TEMPERATURE = 0.5
-MAX_GENERATE_TOKENS = 8192
+TEMPERATURE = 0.3
+MAX_GENERATE_TOKENS = 4096
 TOP_K = 50
 TOP_P = 0.3
 PAD_ZERO = True
@@ -424,7 +424,6 @@ for sample, predicted in zip(dataset, outputs):
 
 outputs = parallel_generate(dataset)
 
-flag = False
 correct_count = 0
 total = 0
 score_by_subject = {}
@@ -440,17 +439,6 @@ for sample in outputs:
     score_by_subject[subject]["total"] += 1
     sample["correct"] = is_correct
 
-    # for debug
-    if not flag:
-        print(sample["all_prefix"])
-        print(f"GT: {sample['answer']}")
-        print(f"Predicted: {sample['predicted']}")
-        print(f"Correct(judge): {is_correct}")
-        print("-" * 100)
-        c = input()
-        if c == "q":
-            flag = True
-
 print(f"Correct: {correct_count} - Total: {total} - Accuracy: {correct_count / total:.5f}")
 
 
@@ -461,7 +449,7 @@ now = datetime.datetime.now()
 model_name_part = safe_filename(os.path.basename(args.MODEL_NAME))
 dataset_name_part = safe_filename(os.path.basename(DATASET_PATH))
 file_name = f'logs/cot_{model_name_part}_{dataset_name_part}_{now.strftime("%Y%m%d%H%M%S")}.json'
-with open(file_name, "w") as f:
+with open(file_name, "w", encoding="utf-8") as f:
     json.dump(
         {
             "model": args.MODEL_NAME,
@@ -489,5 +477,6 @@ with open(file_name, "w") as f:
         },
         f,
         indent=4,
+        ensure_ascii=False,
     )
 print(f"Results saved to {file_name}")

@@ -1,5 +1,21 @@
 # RWKV Evaluation
 
+## Expected Evaluation Results
+
+**Model:** `rwkv7-g1a-2.9b-20250924-ctx4096`
+
+| Dataset    | Non-CoT Single-Choice Eval | CoT Single-Choice Eval | General CoT Eval | General CoT Eval with LLM Judge |
+|:----------:|:---------------------------:|:---------------------:|:----------------:|:-------------------------------:|
+| MMLU       | 61.2%                        | ~66%                  | N/A              | N/A                             |
+| MMLU-Pro   | 31.5%                        | ~43%                 | N/A              | N/A                             |
+| Ceval-exam | 48.9%                        | ~51%                 | N/A              | N/A                             |
+| GSM8K      | N/A                         | N/A                   | ~77%            | N/A                             |
+| MATH500    | N/A                         | N/A                   | N/A              | ~50%                           |
+
+> **Note:**  
+> Due to the inherent randomness in CoT evaluation, results may fluctuate. It is recommended to run the evaluation multiple times and average the results for a more reliable metric.
+> Performance can be further improved by further adjusting the sampling parameters.
+
 ## Non-CoT Single-Choice Evaluation
 
 #### For each question, feed it to the model and compare the probabilities assigned to each answer option for the next token. If the correct answer has the highest probability, it is considered correct. This evaluation approach is suitable for datasets like MMLU, MMLU-Pro, and Ceval-exam.

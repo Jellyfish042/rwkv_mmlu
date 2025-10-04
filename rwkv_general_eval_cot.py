@@ -131,7 +131,7 @@ def continuous_batching(
 
     pbar = tqdm(
         total=total_inputs,
-        desc="Generating CoT",
+        desc="Generating",
         unit=" Sequence",
         bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{elapsed}<{remaining}, {rate_fmt}]",
     )
@@ -283,8 +283,8 @@ print(cot_generation_input_example)
 print("-" * 100)
 
 # Generation settings
-TEMPERATURE = 0.5
-MAX_GENERATE_TOKENS = 8192
+TEMPERATURE = 0.3
+MAX_GENERATE_TOKENS = 4096
 TOP_K = 50
 TOP_P = 0.3
 PAD_ZERO = True
@@ -327,9 +327,8 @@ print(answer_generation_input_example)
 print("-" * 100)
 
 # Generation settings
-outputs = continuous_batching(model, tokenizer, all_inputs, [2402], 16, BATCH_SIZE, True, 1.0, 1, 0.3, 0.0, 0.0, 0.99)
+outputs = continuous_batching(model, tokenizer, all_inputs, [0, 2402, 4910], 16, BATCH_SIZE, True, 1.0, 1, 0.3, 0.0, 0.0, 0.99)
 
-flag = False
 correct = 0
 total = 0
 score_by_subject = {}
@@ -345,17 +344,6 @@ for sample, predicted in zip(dataset, outputs):
     score_by_subject[subject]["total"] += 1
     sample["predicted"] = predicted["generated_text"]
 
-    # for debug
-    if flag:
-        continue
-    print(sample["all_prefix"])
-    print(f"GT: {gt}")
-    print(f"Predicted: {predicted['generated_text']}")
-    print("-" * 100)
-    c = input()
-    if c == "q":
-        flag = True
-
 print(f"Correct: {correct} - Total: {total} - Accuracy: {correct / total:.5f}")
 
 
@@ -366,7 +354,7 @@ now = datetime.datetime.now()
 model_name_part = safe_filename(os.path.basename(args.MODEL_NAME))
 dataset_name_part = safe_filename(os.path.basename(DATASET_PATH))
 file_name = f'logs/cot_{model_name_part}_{dataset_name_part}_{now.strftime("%Y%m%d%H%M%S")}.json'
-with open(file_name, "w") as f:
+with open(file_name, "w", encoding="utf-8") as f:
     json.dump(
         {
             "model": args.MODEL_NAME,
@@ -394,5 +382,6 @@ with open(file_name, "w") as f:
         },
         f,
         indent=4,
+        ensure_ascii=False,
     )
 print(f"Results saved to {file_name}")

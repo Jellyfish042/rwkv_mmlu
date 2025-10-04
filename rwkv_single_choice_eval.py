@@ -106,7 +106,7 @@ for subject in score_by_subject:
     score_by_subject[subject]["accuracy"] = score_by_subject[subject]["correct"] / score_by_subject[subject]["total"]
 now = datetime.datetime.now()
 file_name = f'logs/results_{now.strftime("%Y%m%d%H%M%S")}.json'
-with open(file_name, "w") as f:
+with open(file_name, "w", encoding="utf-8") as f:
     json.dump(
         {
             "model": MODEL_PATH,
@@ -120,5 +120,6 @@ with open(file_name, "w") as f:
         },
         f,
         indent=4,
+        ensure_ascii=False,
     )
 print(f"Results saved to {file_name}")

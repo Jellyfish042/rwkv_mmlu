@@ -4,6 +4,7 @@
 #
 ########################################################################################################
 
+import os
 import json
 import types
 import torch
@@ -81,6 +82,10 @@ with open(DATASET_PATH, "r", encoding="utf-8") as f:
 ########################################################################################################
 
 
+def safe_filename(s):
+    return "".join([c if c.isalnum() or c in "._" else "_" for c in s]).replace(".", "_")
+
+
 def continuous_batching(
     model,
     tokenizer,
@@ -141,7 +146,7 @@ def continuous_batching(
 
     pbar = tqdm(
         total=total_inputs,
-        desc="Generating CoT",
+        desc="Generating",
         unit=" Sequence",
         bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{elapsed}<{remaining}, {rate_fmt}]",
     )
@@ -303,8 +308,8 @@ MAX_GENERATE_TOKENS = 4096
 TOP_K = 50
 TOP_P = 0.3
 PAD_ZERO = True
-ALPHA_PRESENCE = 1.0
-ALPHA_FREQUENCY = 0.1
+ALPHA_PRESENCE = 0.5
+ALPHA_FREQUENCY = 0.5
 ALPHA_DECAY = 0.99
 STOP_TOKENS = [0, 261, 24281]
 BATCH_SIZE = 512
@@ -381,8 +386,10 @@ pbar.close()
 for subject in score_by_subject:
     score_by_subject[subject]["accuracy"] = score_by_subject[subject]["correct"] / score_by_subject[subject]["total"]
 now = datetime.datetime.now()
-file_name = f'logs/results_cot_{now.strftime("%Y%m%d%H%M%S")}.json'
-with open(file_name, "w") as f:
+model_name_part = safe_filename(os.path.basename(args.MODEL_NAME))
+dataset_name_part = safe_filename(os.path.basename(DATASET_PATH))
+file_name = f'logs/cot_{model_name_part}_{dataset_name_part}_{now.strftime("%Y%m%d%H%M%S")}.json'
+with open(file_name, "w", encoding="utf-8") as f:
     json.dump(
         {
             "model": args.MODEL_NAME,
@@ -412,5 +419,6 @@ with open(file_name, "w") as f:
         },
         f,
         indent=4,
+        ensure_ascii=False,
     )
 print(f"Results saved to {file_name}")
