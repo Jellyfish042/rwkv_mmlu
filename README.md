@@ -6,11 +6,11 @@
 
 | Dataset    | Non-CoT Single-Choice Eval | CoT Single-Choice Eval | General CoT Eval | General CoT Eval with LLM Judge |
 |:----------:|:---------------------------:|:---------------------:|:----------------:|:-------------------------------:|
-| MMLU       | 61.2%                        | ~66%                  | N/A              | N/A                             |
-| MMLU-Pro   | 31.5%                        | ~43%                 | N/A              | N/A                             |
-| Ceval-exam | 48.9%                        | ~51%                 | N/A              | N/A                             |
-| GSM8K      | N/A                         | N/A                   | ~77%            | N/A                             |
-| MATH500    | N/A                         | N/A                   | N/A              | ~50%                           |
+| MMLU       | 61.2%                        | ~66%                  | -              | -                             |
+| MMLU-Pro   | 31.5%                        | ~43%                 | -              | -                             |
+| Ceval-exam | 48.9%                        | ~51%                 | -              | -                             |
+| GSM8K      | -                         | -                   | ~77%            | -                             |
+| MATH500    | -                         | -                   | -              | ~50%                           |
 
 > **Note:**  
 > Due to the inherent randomness in CoT evaluation, results may fluctuate. It is recommended to run the evaluation multiple times and average the results for a more reliable metric.
