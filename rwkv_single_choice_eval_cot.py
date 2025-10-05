@@ -55,7 +55,7 @@ TEMPLATE = """User: You are a very talented expert in <SUBJECT>. Answer this que
 <Q>
 <CHOICES>
 
-Assistant:"""
+Assistant: <think"""
 FINAL_ANSWER_GENERATION_TEMPLATE = """<Q><COT>
 Therefore, the answer is"""
 

@@ -4,22 +4,14 @@
 
 **Model:** `rwkv7-g1a-2.9b-20250924-ctx4096`
 
-<!-- | Dataset    | Non-CoT Single-Choice Eval | CoT Single-Choice Eval | General CoT Eval | General CoT Eval with LLM Judge | General CoT Eval (User: \<Q\>\n\nAssistant:) |General CoT Eval with LLM Judge (User: \<Q\>\n\nAssistant:) |
-|:----------:|:---------------------------:|:---------------------:|:----------------:|:-------------------------------:|:-------------------------------:|:-------------------------------:|
-| MMLU       | 61.2%                        | ~66%                  | -              | -                             | - | - |
-| MMLU-Pro   | 31.5%                        | ~43%                 | -              | -                             | - | - |
-| Ceval-exam | 48.9%                        | ~51%                 | -              | -                             | - | - |
-| GSM8K      | -                         | -                   | ~77%            | -                             | ~75% | - |
-| MATH500    | -                         | -                   | -              | ~50%                           | - | ~44% | -->
-
-| Dataset    | Non-CoT Single-Choice Eval | CoT Single-Choice Eval | General CoT Eval | General CoT Eval with LLM Judge | General CoT Eval | General CoT Eval with LLM Judge |
-|:----------:|:---------------------------:|:---------------------:|:----------------:|:-------------------------------:|:-------------------------------:|:-------------------------------:|
-| Template    | User: You are a very talented expert in \<SUBJECT\>. Answer this question:\n\<Q\>\n\<CHOICES\>\n\nAssistant: The answer is | User: You are a very talented expert in \<SUBJECT\>. Answer this question:\n\<Q\>\n\<CHOICES\>\n\nAssistant: | User: \<Q\>\n\nAssistant: <think | User: \<Q\>\n\nAssistant: <think | User: \<Q\>\n\nAssistant: | User: \<Q\>\n\nAssistant: |
-| MMLU       | 61.2%                        | ~66%                  | -              | -                             | - | - |
-| MMLU-Pro   | 31.5%                        | ~43%                 | -              | -                             | - | - |
-| Ceval-exam | 48.9%                        | ~51%                 | -              | -                             | - | - |
-| GSM8K      | -                         | -                   | ~77%            | -                             | ~75% | - |
-| MATH500    | -                         | -                   | -              | ~50%                           | - | ~44% |
+| Dataset    | Single-Token Eval | CoT Eval | QA Eval |
+|:----------:|:------------------:|:---------:|:---------:|
+| Template   | User: You are a very talented expert in \<SUBJECT\>. Answer this question:<br>\<Q\>\<CHOICES\><br><br>Assistant: The answer is | User: \<Q\><br><br>Assistant: <think | User: \<Q\><br><br>Assistant: |
+| MMLU       | 61.2% | ~66% | - |
+| MMLU-Pro   | 31.5% | ~42% | - |
+| Ceval-exam | 48.9% | ~51% | - |
+| GSM8K      | - | ~77% | ~75% |
+| MATH500    | - | ~50% (with LLM Judge) | ~44% (with LLM Judge) |
 
 > **Note:**  
 > Due to the inherent randomness in CoT evaluation, results may fluctuate. It is recommended to run the evaluation multiple times (with different seeds) and average the results for a more reliable metric.
