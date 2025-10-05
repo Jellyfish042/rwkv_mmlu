@@ -4,8 +4,17 @@
 
 **Model:** `rwkv7-g1a-2.9b-20250924-ctx4096`
 
-| Dataset    | Non-CoT Single-Choice Eval | CoT Single-Choice Eval | General CoT Eval | General CoT Eval with LLM Judge | General CoT Eval (User: \<Q\>\n\nAssistant:) |General CoT Eval with LLM Judge (User: \<Q\>\n\nAssistant:) |
+<!-- | Dataset    | Non-CoT Single-Choice Eval | CoT Single-Choice Eval | General CoT Eval | General CoT Eval with LLM Judge | General CoT Eval (User: \<Q\>\n\nAssistant:) |General CoT Eval with LLM Judge (User: \<Q\>\n\nAssistant:) |
 |:----------:|:---------------------------:|:---------------------:|:----------------:|:-------------------------------:|:-------------------------------:|:-------------------------------:|
+| MMLU       | 61.2%                        | ~66%                  | -              | -                             | - | - |
+| MMLU-Pro   | 31.5%                        | ~43%                 | -              | -                             | - | - |
+| Ceval-exam | 48.9%                        | ~51%                 | -              | -                             | - | - |
+| GSM8K      | -                         | -                   | ~77%            | -                             | ~75% | - |
+| MATH500    | -                         | -                   | -              | ~50%                           | - | ~44% | -->
+
+| Dataset    | Non-CoT Single-Choice Eval | CoT Single-Choice Eval | General CoT Eval | General CoT Eval with LLM Judge | General CoT Eval | General CoT Eval with LLM Judge |
+|:----------:|:---------------------------:|:---------------------:|:----------------:|:-------------------------------:|:-------------------------------:|:-------------------------------:|
+| Template    | User: You are a very talented expert in \<SUBJECT\>. Answer this question:\n\<Q\>\n\<CHOICES\>\n\nAssistant: The answer is | User: You are a very talented expert in \<SUBJECT\>. Answer this question:\n\<Q\>\n\<CHOICES\>\n\nAssistant: | User: \<Q\>\n\nAssistant: <think | User: \<Q\>\n\nAssistant: <think | User: \<Q\>\n\nAssistant: | User: \<Q\>\n\nAssistant: |
 | MMLU       | 61.2%                        | ~66%                  | -              | -                             | - | - |
 | MMLU-Pro   | 31.5%                        | ~43%                 | -              | -                             | - | - |
 | Ceval-exam | 48.9%                        | ~51%                 | -              | -                             | - | - |
