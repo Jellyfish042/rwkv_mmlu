@@ -4,13 +4,13 @@
 
 **Model:** `rwkv7-g1a-2.9b-20250924-ctx4096`
 
-| Dataset    | Non-CoT Single-Choice Eval | CoT Single-Choice Eval | General CoT Eval | General CoT Eval with LLM Judge |
-|:----------:|:---------------------------:|:---------------------:|:----------------:|:-------------------------------:|
-| MMLU       | 61.2%                        | ~66%                  | -              | -                             |
-| MMLU-Pro   | 31.5%                        | ~43%                 | -              | -                             |
-| Ceval-exam | 48.9%                        | ~51%                 | -              | -                             |
-| GSM8K      | -                         | -                   | ~77%            | -                             |
-| MATH500    | -                         | -                   | -              | ~50%                           |
+| Dataset    | Non-CoT Single-Choice Eval | CoT Single-Choice Eval | General CoT Eval | General CoT Eval with LLM Judge | General CoT Eval (User: \<Q\>\n\nAssistant:) |General CoT Eval with LLM Judge (User: \<Q\>\n\nAssistant:) |
+|:----------:|:---------------------------:|:---------------------:|:----------------:|:-------------------------------:|:-------------------------------:|:-------------------------------:|
+| MMLU       | 61.2%                        | ~66%                  | -              | -                             | - | - |
+| MMLU-Pro   | 31.5%                        | ~43%                 | -              | -                             | - | - |
+| Ceval-exam | 48.9%                        | ~51%                 | -              | -                             | - | - |
+| GSM8K      | -                         | -                   | ~77%            | -                             | ~75% | - |
+| MATH500    | -                         | -                   | -              | ~50%                           | - | ~44% |
 
 > **Note:**  
 > Due to the inherent randomness in CoT evaluation, results may fluctuate. It is recommended to run the evaluation multiple times (with different seeds) and average the results for a more reliable metric.
