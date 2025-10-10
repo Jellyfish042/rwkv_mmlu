@@ -17,7 +17,7 @@
 > Due to the inherent randomness in CoT evaluation, results may fluctuate. It is recommended to run the evaluation multiple times (with different seeds) and average the results for a more reliable metric.
 > Performance can be further improved by further adjusting the sampling parameters amd prompt template.
 
-## Non-CoT Single-Choice Evaluation
+## Non-CoT Single-Choice Evaluation (Single-Token Eval)
 
 #### For each question, feed it to the model and compare the probabilities assigned to each answer option for the next token. If the correct answer has the highest probability, it is considered correct. This evaluation approach is suitable for datasets like MMLU, MMLU-Pro, and Ceval-exam.
 
