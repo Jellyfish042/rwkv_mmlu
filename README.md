@@ -13,6 +13,16 @@
 | GSM8K      | - | ~77% | ~75% |
 | MATH500    | - | ~50% (with LLM Judge) | ~44% (with LLM Judge) |
 
+**Model:** `rwkv7-g0a2preview773-7.2b-20251003-ctx4096`
+
+| Dataset    | Single-Token Eval | CoT Eval | QA Eval |
+|:----------:|:------------------:|:---------:|:---------:|
+| Template   | User: You are a very talented expert in \<SUBJECT\>. Answer this question:<br>\<Q\>\<CHOICES\><br><br>Assistant: The answer is | User: \<Q\><br><br>Assistant: <think | User: \<Q\><br><br>Assistant: |
+| MMLU       | 64.3% | - | - |
+| MMLU-Pro   | 34.8% | ~51% | - |
+| GSM8K      | - | ~84% | - |
+| MATH500    | - | ~63% (with LLM Judge) | - |
+
 > **Note:**  
 > Due to the inherent randomness in CoT evaluation, results may fluctuate. It is recommended to run the evaluation multiple times (with different seeds) and average the results for a more reliable metric.
 > Performance can be further improved by further adjusting the sampling parameters amd prompt template.
