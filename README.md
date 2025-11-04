@@ -133,3 +133,16 @@
     ```bash
     python rwkv_general_eval_cot_llm_judge.py
     ```
+
+## Instruction Following Evaluation(IFEval)
+1. **Generate Responses**
+    ```bash
+    python if_eval_gen.py
+    ```
+2. **Evaluate Responses**
+    ```bash
+    python3 -m instruction_following_eval.evaluation_main \
+      --input_data=./instruction_following_eval/data/input_data.jsonl \
+      --input_response_data=./instruction_following_eval/data/xxx.jsonl \
+      --output_dir=./instruction_following_eval/data/
+    ```
