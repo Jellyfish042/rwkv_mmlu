@@ -146,3 +146,18 @@
       --input_response_data=./instruction_following_eval/data/xxx.jsonl \
       --output_dir=./instruction_following_eval/data/
     ```
+
+## Human-Eval
+1. **Install Dependencies**
+    ```bash
+    $ git clone https://github.com/openai/human-eval
+    $ pip install -e human-eval
+    ```
+2. **Generate Responses**
+    ```bash
+    python human_eval_generation.py
+    ```
+3. **Evaluate Responses**
+    ```bash
+    evaluate_functional_correctness human_eval_results/xxx.jsonl
+    ```
