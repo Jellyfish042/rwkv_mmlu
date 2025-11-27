@@ -29,10 +29,7 @@ args.head_size = 64
 
 # model download: https://huggingface.co/BlinkDL/rwkv7-g1
 
-# args.MODEL_NAME = "/mnt/Public/rwkv_models/rwkv7-g1a-2.9b-20250924-ctx4096"
-# args.MODEL_NAME = "/mnt/Public/rwkv_models/rwkv7-g0a3-7.2b-20251029-ctx8192"
-# args.MODEL_NAME = "/mnt/Public/rwkv_models/rwkv7-g0a3-13.3b-20251031-ctx4096"
-args.MODEL_NAME = "/mnt/Public/rwkv_models/rwkv7-g0a4-13.3b-20251114-ctx8192"
+args.MODEL_NAME = "rwkv7-g0a4-13.3b-20251114-ctx8192"
 
 print(f"\nUsing CUDA fp16. Loading {args.MODEL_NAME} ...\n")
 
